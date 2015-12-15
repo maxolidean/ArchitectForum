@@ -83,6 +83,15 @@ app.get('/getroutesbydistance/:lat/:lon/:radius', function(req, res, next) {
 	});
 });
 
+app.get('/getroutesbystop/:agency_key/:stop_id', function(req, res, next) {
+	var agency_key = req.params.agency_key;
+	var stop_id = JSON.parse(req.params.stop_id);
+	
+	gtfs.getRoutesByStop(agency_key, stop_id, function(err, routes) {
+		res.json(routes);
+	});
+});
+
 app.get('/getstops/:agency_key/:stop_ids', function(req, res, next) {
 	var agency_key = req.params.agency_key;
 	var stop_ids = JSON.parse(req.params.stop_ids);
